@@ -7,9 +7,8 @@ import matplotlib.pyplot as plt
 
 # Argument parsing
 parser = argparse.ArgumentParser(description="TP1 knn")
-parser.add_argument("--visualize", type=int, help="Visualize data")
-parser.add_argument("--neighbors", type=int, default=10, help="Neighbor count")
-parser.add_argument("--visualize_prediction", type=int, help="Visualize a prediction")
+parser.add_argument("--visualize_data", type=int, metavar="data_id", help="Visualize image n and display corresponding class")
+parser.add_argument("--unique_train", type=int, metavar="k", help="Run an unique knn train with the specified k")
 parser.add_argument("--best_k", action="store_true", help="Find best k by iterating from 2 to 15")
 
 args = parser.parse_args()
@@ -26,7 +25,7 @@ def visualize(data, target):
     print(target)
     plt.show()
 
-if args.visualize != None:
+if args.visualize_data != None:
     visualize(images[args.visualize], mnist.target[args.visualize])
     sys.exit(0)
 
@@ -35,6 +34,7 @@ from sklearn.model_selection import train_test_split
 import sklearn.neighbors as knn
 import numpy as np
 
+# Create Dataset
 mnist_size = len(mnist.data)
 subset_size = 5000
 ids = np.random.randint(mnist_size, size=subset_size)
@@ -43,19 +43,30 @@ subset_target = mnist.target[ids]
 
 xtrain, xtest, ytrain, ytest = train_test_split(subset_data, subset_target, train_size=0.8)
 
-def train_knn(neighbors, visualize):
-    print("Training with n = %d" % (neighbors,))
+def train_knn(neighbors):
+    print("Training with k = %d" % (neighbors,))
     
     clf = knn.KNeighborsClassifier(neighbors)
     clf.fit(xtrain, ytrain)
+    score = clf.score(xtest, ytest)
 
-    if visualize != None:
-        visualize(xtest[visualize], clf.predict(xtest[visualize].reshape((1, -1))))
+    print("Score for %d neighbors is %f" % (neighbors, score))
+    return clf, score
 
-    print("Score for %d neighbors is %f" % (neighbors, clf.score(xtest, ytest)))
- 
-train_knn(args.neighbors, args.visualize_prediction)
+if args.unique_train != None:
+    knn0 = train_knn(args.unique_train)[0]
+    visualize(xtest[0], knn0.predict(xtest[0].reshape((1, -1))))
 
 # Test with multiple k
+best_classifier = None
+best_score = 0
+
 if args.best_k != None:
-    pass
+    for k in range(2, 15):
+        knn_k, score = train_knn(k)
+        
+        if score > best_score:
+            best_score = score
+            best_classifier = knn_k
+            
+print("Best classifier is k = %d with score: %f" % (best_classifier.n_neighbors, best_score))
