@@ -39,6 +39,7 @@ if args.visualize_data != None:
 #MLPClassifier
 from sklearn.model_selection import train_test_split
 import sklearn.neural_network as n_network
+import sklearn.metrics as metrics
 import numpy as np
 
 
@@ -61,12 +62,28 @@ def classifier(hidden_layer_sizes,activation, solver, alpha):
     score = mlpc.score(xtest, ytest)
     scoring_t = time.time()
 
-    print("Score is %f with %d hidden layers, with the following neural number: %s" % (score, len(hidden_layer_sizes)
+    print("The precision is %f with %d hidden layers, with the following neural number: %s" % (score, len(hidden_layer_sizes)
                                                                                     ,str(hidden_layer_sizes)))
     print("Training time %f ms, scoring time %f ms" % ((training_t - t) * 1000, (scoring_t - training_t) * 1000))
+    print("The precision is :")
+    #ypred = mlpc.predict(xtest)
+    #print(metrics.precision_score(ytest, ypred, average='micro'))
     return mlpc, score
 
 
+#create hidden_layer_sizes list
+def layer(length):
+    liste =[]
+    for i in range(length):
+        liste.append(50)
+    return liste
+
 # Run a normal test without making anything vary
+print("With 1 layer of 50 neurals")
 mlpc0 = classifier(args.hidden_layer_sizes, args.activation, args.solver, args.alpha)[0]
 visualize(xtest[0], mlpc0.predict(xtest[0].reshape((1, -1))))
+
+for i in [2, 10, 20, 50, 100]:
+    print("With %d layer of 50 neurals" % (i,))
+    mlpc = classifier(layer(i), args.activation, args.solver, args.alpha)[0]
+    visualize(xtest[0], mlpc.predict(xtest[0].reshape((1, -1))))
