@@ -62,12 +62,13 @@ def classifier(hidden_layer_sizes,activation, solver, alpha):
     score = mlpc.score(xtest, ytest)
     scoring_t = time.time()
 
-    print("The precision is %f with %d hidden layers, with the following neural number: %s" % (score, len(hidden_layer_sizes)
-                                                                                    ,str(hidden_layer_sizes)))
+    print("The precision is : %f" % (score))
     print("Training time %f ms, scoring time %f ms" % ((training_t - t) * 1000, (scoring_t - training_t) * 1000))
-    print("The precision is :")
-    #ypred = mlpc.predict(xtest)
-    #print(metrics.precision_score(ytest, ypred, average='micro'))
+    print("The recall score is :")
+    ypred = mlpc.predict(xtest)
+    print(metrics.recall_score(ytest, ypred, labels=None, pos_label=1, average=None, sample_weight=None))
+    print("the zero-one classification loss is :")
+    print(metrics.zero_one_loss(ytest, ypred, normalize=True, sample_weight=None))
     return mlpc, score
 
 
@@ -78,12 +79,37 @@ def layer(length):
         liste.append(50)
     return liste
 
-# Run a normal test without making anything vary
-print("With 1 layer of 50 neurals")
-mlpc0 = classifier(args.hidden_layer_sizes, args.activation, args.solver, args.alpha)[0]
-visualize(xtest[0], mlpc0.predict(xtest[0].reshape((1, -1))))
+#create 50 layers list of x neurals
+def neural(x):
+    liste =[]
+    for i in range(50):
+        liste.append(x)
+    return liste
 
-for i in [2, 10, 20, 50, 100]:
-    print("With %d layer of 50 neurals" % (i,))
-    mlpc = classifier(layer(i), args.activation, args.solver, args.alpha)[0]
-    visualize(xtest[0], mlpc.predict(xtest[0].reshape((1, -1))))
+# Run a normal test without making anything vary
+#print("With 1 layer of 50 neurals")
+#mlpc0 = classifier(args.hidden_layer_sizes, args.activation, args.solver, args.alpha)[0]
+#visualize(xtest[0], mlpc0.predict(xtest[0].reshape((1, -1))))
+
+solver = ["lbfgs", "sgd", "adam"]
+activation = ["identity", "logistic", "tanh", "relu"]
+alpha = [0.01, 0.001, 0.0001, 0.00001]
+
+for solv in solver:
+	print("With the following solver : "+solv)
+	for activ in activation:
+		print("With the following activation function : "+activ)
+		for al in alpha:
+			print("With the following alpha regularization parameter: %f" % (al))
+			for i in [2, 10, 20, 50, 100]:
+				print("With %d layer of 50 neurals" % (i,))
+				mlpc = classifier(layer(i), activ, solv, al)[0]
+				visualize(xtest[0], mlpc.predict(xtest[0].reshape((1, -1))))
+
+			for i in [60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10]:
+				print("With 50 layer of %d neurals" % (i,))
+				mlpc = classifier(neural(i), activ, solv, al)[0]
+				visualize(xtest[0], mlpc.predict(xtest[0].reshape((1, -1))))
+
+
+
