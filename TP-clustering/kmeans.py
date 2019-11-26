@@ -28,12 +28,24 @@ data = np.array([x, y]).transpose()
 if args.best_cluster:
     best_i_score= 1.0
     best_i = 0
+    best_j_score = 0.0
+    best_j = 0
     for i in range(2, 11):
         km = KMeans(n_clusters = i, init = "k-means++")
         labels = km.fit_predict(data)
-        if metrics.davies_bouldin_score(data, labels)< best_i_score:
-            best_i_score = metrics.davies_bouldin_score(data, labels)
+        db_score = metrics.davies_bouldin_score(data, labels)
+        sil_score = metrics.silhouette_score(data, labels, metric="euclidean", sample_size=None, random_state=None)
+        if db_score < best_i_score:
+            best_i_score = db_score
             best_i = i
+        if sil_score > best_j_score:
+            best_j_score = metrics.davies_bouldin_score(data, labels)
+            best_j = i
+
+    km = KMeans(n_clusters=best_j, init="k-means++")
+    labels = km.fit_predict(data)
+    print("best silhouette score for cluster= %d is %f" %(best_j, best_j_score))
+    
     km = KMeans(n_clusters=best_i, init="k-means++")
     labels = km.fit_predict(data)
     print("best davies bouldin score for cluster= %d is %f" %(best_i, best_i_score))
