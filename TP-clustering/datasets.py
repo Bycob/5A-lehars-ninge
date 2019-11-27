@@ -19,7 +19,21 @@ def visualize(x, y, color):
     fig = plt.figure()
     ax = fig.add_subplot(111)
     
-    ax.scatter(x, y, c = color)
+    color_valid = True
+    
+    for c in color:
+        try:
+            _ = int(c)
+        except:
+            color_valid = False
+            print("Class format not recognized.")
+            break
+    
+    if color_valid:
+        ax.scatter(x, y, c = color, cmap= "tab20")
+    else:
+        ax.scatter(x, y)
+        
     plt.show()
 
 if __name__ == "__main__":

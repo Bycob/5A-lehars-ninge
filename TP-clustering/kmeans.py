@@ -26,34 +26,38 @@ x, y, _ = load_dset(args.file)
 data = np.array([x, y]).transpose()
 
 if args.best_cluster:
-    best_i_score= 1.0
-    best_i = 0
-    best_j_score = 0.0
-    best_j = 0
-    for i in range(2, 11):
+    best_db_score= 1.0
+    best_db = 0
+    best_sil_score = 0.0
+    best_sil = 0
+    
+    for i in range(2, 20):
         km = KMeans(n_clusters = i, init = "k-means++")
         labels = km.fit_predict(data)
         db_score = metrics.davies_bouldin_score(data, labels)
         sil_score = metrics.silhouette_score(data, labels, metric="euclidean", sample_size=None, random_state=None)
-        if db_score < best_i_score:
-            best_i_score = db_score
-            best_i = i
-        if sil_score > best_j_score:
-            best_j_score = metrics.davies_bouldin_score(data, labels)
-            best_j = i
+        
+        if db_score < best_db_score:
+            best_db_score = db_score
+            best_db = i
+        
+        if sil_score > best_sil_score:
+            best_sil_score = sil_score
+            best_sil = i
 
-    km = KMeans(n_clusters=best_j, init="k-means++")
+    km = KMeans(n_clusters=best_sil, init="k-means++")
     labels = km.fit_predict(data)
-    print("best silhouette score for cluster= %d is %f" %(best_j, best_j_score))
+    print("Best silhouette score for cluster= %d is %f" %(best_sil, best_sil_score))
     
-    km = KMeans(n_clusters=best_i, init="k-means++")
+    km = KMeans(n_clusters=best_db, init="k-means++")
     labels = km.fit_predict(data)
-    print("best davies bouldin score for cluster= %d is %f" %(best_i, best_i_score))
-
-    visualize(x, y, labels)
+    print("Best davies bouldin score for cluster= %d is %f" %(best_db, best_db_score))
+    
+    args.cluster = best_db
 else:
     km = KMeans(n_clusters = args.cluster, init = "k-means++")
     labels = km.fit_predict(data)
+
 print("cluster= %d" %(args.cluster))
 #print("rand score : %f" %(metrics.adjusted_rand_score(labels_true, labels)))
 print("davies bouldin score : %f" %(metrics.davies_bouldin_score(data, labels)))
