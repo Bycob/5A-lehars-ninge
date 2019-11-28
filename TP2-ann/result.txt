@@ -1,0 +1,258 @@
+train size = 49000, test size = 21000
+with default parameters : solver= adam, activation= relu, alpha= 0.0001
+With 2 layers of 50 neurals
+Training with 2 hidden layers, with the following neural number: [50, 50]
+The precision is : 0.954952
+Training time 71814.265728 ms, scoring time 104.408503 ms
+The recall score is :
+ 0.9547571
+the zero-one classification loss is :
+0.045047619047619
+['7']
+With 10 layers of 50 neurals
+Training with 10 hidden layers, with the following neural number: [50, 50, 50, 50, 50, 50, 50, 50, 50, 50]
+The precision is : 0.968714
+Training time 173826.659679 ms, scoring time 199.436188 ms
+The recall score is :
+0.9684542
+the zero-one classification loss is :
+0.03128571428571425
+['8']
+With 20 layers of 50 neurals
+Training with 20 hidden layers, with the following neural number: [50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]
+The precision is : 0.970048
+Training time 261210.016727 ms, scoring time 318.098545 ms
+The recall score is :
+0.9698285
+the zero-one classification loss is :
+0.029952380952380953
+['8']
+With 50 layers of 50 neurals
+Training with 50 hidden layers, with the following neural number: [50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]
+The precision is : 0.114714
+Training time 105924.637794 ms, scoring time 485.176563 ms
+The recall score is :
+0.8853
+the zero-one classification loss is :
+0.8852857142857142
+['1']
+With 100 layers of 50 neurals
+Training with 100 hidden layers, with the following neural number: [50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]
+The precision is : 0.105857
+Training time 224334.860563 ms, scoring time 904.998541 ms
+The recall score is :
+0.8853
+the zero-one classification loss is :
+0.8941428571428571
+['7']
+With 50 layers of 60 neurals
+Training with 50 hidden layers, with the following neural number: [60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60]
+The precision is : 0.904333
+Training time 218093.475580 ms, scoring time 662.595510 ms
+The recall score is :
+0.9029882
+the zero-one classification loss is :
+0.09566666666666668
+['8']
+With 50 layers of 55 neurals
+Training with 50 hidden layers, with the following neural number: [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55]
+The precision is : 0.114714
+Training time 145753.888607 ms, scoring time 552.064419 ms
+The recall score is :
+0.8853
+the zero-one classification loss is :
+0.8852857142857142
+['1']
+With 50 layers of 50 neurals
+Training with 50 hidden layers, with the following neural number: [50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]
+The precision is : 0.814333
+Training time 201503.240585 ms, scoring time 498.302937 ms
+The recall score is :
+0.8105541
+the zero-one classification loss is :
+0.18566666666666665
+['8']
+With 50 layers of 45 neurals
+Training with 50 hidden layers, with the following neural number: [45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45]
+The precision is : 0.114714
+Training time 116411.651611 ms, scoring time 435.960531 ms
+The recall score is :
+0.8853
+the zero-one classification loss is :
+0.8852857142857142
+['1']
+With 50 layers of 40 neurals
+Training with 50 hidden layers, with the following neural number: [40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40]
+The precision is : 0.761333
+Training time 161709.226131 ms, scoring time 399.344206 ms
+The recall score is :
+0.7570845
+the zero-one classification loss is :
+0.2386666666666667
+['8']
+With 50 layers of 35 neurals
+Training with 50 hidden layers, with the following neural number: [35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+The precision is : 0.694762
+Training time 266473.316431 ms, scoring time 353.796482 ms
+The recall score is :
+0.6935572
+the zero-one classification loss is :
+0.3052380952380952
+['9']
+With 50 layers of 30 neurals
+Training with 50 hidden layers, with the following neural number: [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30]
+The precision is : 0.797952
+Training time 128439.211845 ms, scoring time 308.871031 ms
+The recall score is :
+ 0.7971951
+the zero-one classification loss is :
+0.20204761904761903
+['5']
+With 50 layers of 25 neurals
+Training with 50 hidden layers, with the following neural number: [25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25]
+The precision is : 0.114714
+Training time 71118.147373 ms, scoring time 256.352425 ms
+The recall score is :
+0.8853
+the zero-one classification loss is :
+0.8852857142857142
+['1']
+With 50 layers of 20 neurals
+Training with 50 hidden layers, with the following neural number: [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20]
+The precision is : 0.114714
+Training time 76118.790627 ms, scoring time 225.306511 ms
+The recall score is :
+0.8853
+the zero-one classification loss is :
+0.8852857142857142
+['1']
+With 50 layers of 15 neurals
+Training with 50 hidden layers, with the following neural number: [15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15]
+The precision is : 0.114714
+Training time 66443.224430 ms, scoring time 181.042194 ms
+The recall score is :
+0.8853
+the zero-one classification loss is :
+0.8852857142857142
+['1']
+With 50 layers of 10 neurals
+Training with 50 hidden layers, with the following neural number: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+The precision is : 0.754048
+Training time 103340.846777 ms, scoring time 138.813019 ms
+The recall score is :
+0.7478883
+the zero-one classification loss is :
+0.24595238095238092
+['3']
+ ---------------------------------------------------
+
+******************************************************
+
+--------------------------------------------------------
+train size = 49000, test size = 21000
+with various parameters :
+With the following solver : lbfgs
+With 3 layers of 50 neurals
+Training with 3 hidden layers, with the following neural number: [50, 50, 50]
+The precision is : 0.947095
+Training time 75056.117058 ms, scoring time 100.469589 ms
+The recall score is :
+0.946664
+the zero-one classification loss is :
+0.0529047619047619
+With the following solver : sgd
+With 3 layers of 50 neurals
+Training with 3 hidden layers, with the following neural number: [50, 50, 50]
+/usr/local/insa/anaconda/lib/python3.7/site-packages/sklearn/neural_network/multilayer_perceptron.py:566: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (200) reached and the optimization hasn't converged yet.
+  % self.max_iter, ConvergenceWarning)
+The precision is : 0.939524
+Training time 188706.279039 ms, scoring time 100.775719 ms
+The recall score is :
+0.9393326
+the zero-one classification loss is :
+0.06047619047619046
+With the following solver : adam
+With 3 layers of 50 neurals
+Training with 3 hidden layers, with the following neural number: [50, 50, 50]
+The precision is : 0.959190
+Training time 89653.556585 ms, scoring time 103.008986 ms
+The recall score is :
+0.9587703
+the zero-one classification loss is :
+0.04080952380952385
+--------------------------------------------
+With the following activation function : identity
+With 3 layers of 50 neurals
+Training with 3 hidden layers, with the following neural number: [50, 50, 50]
+The precision is : 0.918095
+Training time 185788.302422 ms, scoring time 110.569000 ms
+The recall score is :
+0.9169768
+the zero-one classification loss is :
+0.08190476190476192
+With the following activation function : logistic
+With 3 layers of 50 neurals
+Training with 3 hidden layers, with the following neural number: [50, 50, 50]
+The precision is : 0.956000
+Training time 273485.963345 ms, scoring time 203.609705 ms
+The recall score is :
+0.9557439
+the zero-one classification loss is :
+0.04400000000000004
+With the following activation function : tanh
+With 3 layers of 50 neurals
+Training with 3 hidden layers, with the following neural number: [50, 50, 50]
+The precision is : 0.930571
+Training time 60055.754185 ms, scoring time 95.804214 ms
+The recall score is :
+0.929549
+the zero-one classification loss is :
+0.0694285714285714
+With the following activation function : relu
+With 3 layers of 50 neurals
+Training with 3 hidden layers, with the following neural number: [50, 50, 50]
+The precision is : 0.962333
+Training time 110815.040350 ms, scoring time 111.795664 ms
+The recall score is :
+0.9621896
+the zero-one classification loss is :
+0.037666666666666626
+
+With the following alpha regularization parameter: 0.010000
+With 3 layers of 50 neurals
+Training with 3 hidden layers, with the following neural number: [50, 50, 50]
+The precision is : 0.961714
+Training time 83559.434891 ms, scoring time 111.709833 ms
+The recall score is :
+ 0.9613534
+the zero-one classification loss is :
+0.038285714285714256
+With the following alpha regularization parameter: 0.001000
+With 3 layers of 50 neurals
+Training with 3 hidden layers, with the following neural number: [50, 50, 50]
+The precision is : 0.961381
+Training time 95370.024681 ms, scoring time 103.024721 ms
+The recall score is :
+0.9610459
+the zero-one classification loss is :
+0.038619047619047664
+With the following alpha regularization parameter: 0.000100
+With 3 layers of 50 neurals
+Training with 3 hidden layers, with the following neural number: [50, 50, 50]
+The precision is : 0.961000
+Training time 85554.356098 ms, scoring time 101.894140 ms
+The recall score is :
+ 0.9609181
+the zero-one classification loss is :
+0.039000000000000035
+With the following alpha regularization parameter: 0.000010
+With 3 layers of 50 neurals
+Training with 3 hidden layers, with the following neural number: [50, 50, 50]
+The precision is : 0.963238
+Training time 78627.643108 ms, scoring time 103.032827 ms
+The recall score is :
+0.963183
+the zero-one classification loss is :
+0.03676190476190477
+
+
