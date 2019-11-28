@@ -66,7 +66,7 @@ def classifier(hidden_layer_sizes,activation, solver, alpha):
     print("Training time %f ms, scoring time %f ms" % ((training_t - t) * 1000, (scoring_t - training_t) * 1000))
     print("The recall score is :")
     ypred = mlpc.predict(xtest)
-    print(metrics.recall_score(ytest, ypred, labels=None, pos_label=1, sample_weight=None))
+    print(metrics.recall_score(ytest, ypred, labels=None, pos_label=1, sample_weight=None, average='micro'))
     print("the zero-one classification loss is :")
     print(metrics.zero_one_loss(ytest, ypred, normalize=True, sample_weight=None))
     return mlpc, score
