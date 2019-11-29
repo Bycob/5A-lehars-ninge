@@ -1,5 +1,11 @@
 # Travaux Pratiques d'Apprentissage Supervisé à l'Institut National des Sciences Appliquées de Toulouse.
 
+*Important*
+
+Ce repository contient également les TP d'apprentissage non supervisé.
+
+Les répertoires `TP1-knn`, `TP2-ann` et `TP3-SVM` contienent les scripts python relatifs au TP d'apprentissage supervisé. Le répertoire `TP123-Apprentissage` contient le script utilisé pour faire la synthèse des 3 types de modèles.
+
 ## Travail pratique numéro 1
 
 Exécuter à l'aide de la commande suivante (affiche les options disponibles):
