@@ -20,9 +20,6 @@ parser.add_argument("--degree", type=int, default= 3, help="Degree of the polyno
 args = parser.parse_args()
 
 # Get dataset
-import sklearn.datasets as dsets
-
-mnist = dsets.fetch_openml("mnist_784")
 
 # Visualize data
 def visualize(data, target):
@@ -43,12 +40,14 @@ import sklearn.metrics as metrics
 import numpy as np
 
 
-#Create dataset
+#Create dataset (subset of the main dataset)
 mnist_size = len(mnist.data)
-subset_data = mnist.data
-subset_target = mnist.target
+subset_size = 5000
+ids = np.random.randint(mnist_size, size=subset_size)
+subset_data = mnist.data[ids]
+subset_target = mnist.target[ids]
 
-xtrain, xtest, ytrain, ytest = train_test_split(subset_data, subset_target, train_size=49000/mnist_size)
+xtrain, xtest, ytrain, ytest = train_test_split(subset_data, subset_target, train_size=0.7)
 print("train size = %d, test size = %d" % (len(xtrain), len(xtest)))
 
 def classifier(c_param,kernel, degree):
@@ -72,10 +71,10 @@ def classifier(c_param,kernel, degree):
 
     print("The confusion matrix is :")
     print(matrix)
-    return [svc, score, training_t, scoring_t,recall,zero_one]
+    return [svc, score, training_t - t, scoring_t - training_t,recall,zero_one]
 
 c_param=[0.1,0.3,0.5,0.7,0.9]
-kernel=["poly","linear", "sigmoid","precomputed","rbf"]
+kernel=["poly","linear", "sigmoid", "rbf"]
 degree=[3,5,7,10,20]
 score_c, training_t_c, scoring_t_c,recall_c,zero_one_c = ([] for i in range(5))
 score_k, training_t_k, scoring_t_k,recall_k,zero_one_k = ([] for i in range(5))
@@ -83,16 +82,16 @@ score_k, training_t_k, scoring_t_k,recall_k,zero_one_k = ([] for i in range(5))
 for i in c_param:
     svc= classifier(i,args.kernel,args.degree)
     score_c.append(svc[1])
-    training_t_c.append(svc[2])
-    scoring_t_c.append(svc[3])
+    scoring_t_c.append(svc[2])
+    training_t_c.append(svc[3])
     recall_c.append(svc[4])
     zero_one_c.append(svc[5])
     
 for i in kernel:
     svc= classifier(args.c_param,i,args.degree)
     score_k.append(svc[1])
-    training_t_k.append(svc[2])
-    scoring_t_k.append(svc[3])
+    scoring_t_k.append(svc[2])
+    training_t_k.append(svc[3])
     recall_k.append(svc[4])
     zero_one_k.append(svc[5])
 
@@ -121,12 +120,4 @@ print("list of zero-one parameters")
 print(zero_one_k)
 
 
-
-
-
 #visualize(xtest[0], svc[0].predict(xtest[0].reshape((1, -1))))
-
-
-
-
-
