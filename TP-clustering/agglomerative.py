@@ -30,12 +30,15 @@ if args.best_cluster:
     best_db = 0
     best_sil_score = 0.0
     best_sil = 0
+    best_cal_score = 0.0
+    best_cal = 0
     for link in ['ward', 'complete', 'average', 'single']:
         for i in range(2, 20):
             ac = AgglomerativeClustering(n_clusters=i, linkage=link)
             labels = ac.fit_predict(data)
             db_score = metrics.davies_bouldin_score(data, labels)
             sil_score = metrics.silhouette_score(data, labels, metric="euclidean", sample_size=None, random_state=None)
+            cal_score = metrics.calinski_harabasz_score(data, labels)
 
             if db_score < best_db_score:
                 best_db_score = db_score
@@ -44,6 +47,9 @@ if args.best_cluster:
             if sil_score > best_sil_score:
                 best_sil_score = sil_score
                 best_sil = i
+            if cal_score > best_cal_score:
+                best_cal_score = cal_score
+                best_cal = i
 
         ac = AgglomerativeClustering(n_clusters=best_sil, linkage=link)
         labels = ac.fit_predict(data)
@@ -54,6 +60,12 @@ if args.best_cluster:
         labels = ac.fit_predict(data)
         #The minimum score is zero, with lower values indicating better clustering.
         print("Best davies bouldin score for cluster= %d is %f (linkage= %s)" % (best_db, best_db_score, link))
+
+        ac = AgglomerativeClustering(n_clusters=best_db, linkage=link)
+        labels = ac.fit_predict(data)
+        #The score is higher when clusters are dense and well separated, which relates to a standard concept of a cluster.
+        print("Best calinski Harabasz score for cluster= %d is %f (linkage= %s)" % (best_cal, best_cal_score, link))
+        visualize(x, y, labels)
 
         args.cluster = best_db
 else:
@@ -66,6 +78,7 @@ else:
         print("davies bouldin score : %f" % (metrics.davies_bouldin_score(data, labels)))
         print("silhouette score : %f" % (
             metrics.silhouette_score(data, labels, metric="euclidean", sample_size=None, random_state=None)))
+        print("calinski Harabasz score is %f" % (metrics.calinski_harabasz_score(data, labels)))
         visualize(x, y, labels)
 
 
