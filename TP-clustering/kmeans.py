@@ -11,6 +11,8 @@ import sklearn.metrics as metrics
 
 parser = argparse.ArgumentParser(description="TP clustering")
 parser.add_argument("--cluster", type=str, default="2", help="")
+parser.add_argument("--init", type=str, default="k-means++")
+parser.add_argument("--max-clusters", type=int, default=20, help="Max amount of clusters in the data")
 parser.add_argument("file", type=str, help="File to visualize")
 
 args = parser.parse_args()
@@ -26,36 +28,34 @@ x, y, _ = load_dset(args.file)
 data = np.array([x, y]).transpose()
 
 if args.best_cluster:
-    best_db_score= 1.0
-    best_db = 0
+    best_db_score= 10000
+    best_db = None
     best_sil_score = 0.0
-    best_sil = 0
+    best_sil = None
     
-    for i in range(2, 20):
-        km = KMeans(n_clusters = i, init = "k-means++")
+    for i in range(2, args.max_clusters):
+        km = KMeans(n_clusters = i, init = args.init)
         labels = km.fit_predict(data)
         db_score = metrics.davies_bouldin_score(data, labels)
         sil_score = metrics.silhouette_score(data, labels, metric="euclidean", sample_size=None, random_state=None)
         
         if db_score < best_db_score:
             best_db_score = db_score
-            best_db = i
+            best_db = km
         
         if sil_score > best_sil_score:
             best_sil_score = sil_score
-            best_sil = i
+            best_sil = km
 
-    km = KMeans(n_clusters=best_sil, init="k-means++")
-    labels = km.fit_predict(data)
-    print("Best silhouette score for cluster= %d is %f" %(best_sil, best_sil_score))
+    labels = best_sil.fit_predict(data)
+    print("Best silhouette score for cluster= %d is %f" %(best_sil.n_clusters, best_sil_score))
     
-    km = KMeans(n_clusters=best_db, init="k-means++")
-    labels = km.fit_predict(data)
-    print("Best davies bouldin score for cluster= %d is %f" %(best_db, best_db_score))
+    labels = best_db.fit_predict(data)
+    print("Best davies bouldin score for cluster= %d is %f" %(best_db.n_clusters, best_db_score))
     
-    args.cluster = best_db
+    args.cluster = best_db.n_clusters
 else:
-    km = KMeans(n_clusters = args.cluster, init = "k-means++")
+    km = KMeans(n_clusters = args.cluster, init = args.init)
     labels = km.fit_predict(data)
 
 print("cluster= %d" %(args.cluster))

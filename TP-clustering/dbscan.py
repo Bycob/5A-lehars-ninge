@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 
 import argparse
 import matplotlib.pyplot as plt
@@ -8,8 +9,9 @@ from sklearn.cluster import DBSCAN
 import sklearn.metrics as metrics
 
 parser = argparse.ArgumentParser(description="TP clustering")
-parser.add_argument("--eps", type=str, default="0.5", help="eps param for dbscan")
-parser.add_argument("--min-samples", type=str, default="5", help="min_samples param for dbscan")
+parser.add_argument("--eps", type=str, default="0.5", help="eps param for dbscan (default 0.5)")
+parser.add_argument("--min-samples", type=str, default="5", help="min_samples param for dbscan (default 5)")
+parser.add_argument("--criteria", type=str, default="db", help="Criteria for selecting best parameters: db = davies bouldin, sil = silhouette score")
 parser.add_argument("file", type=str, help="File to visualize")
 
 args = parser.parse_args()
@@ -26,6 +28,17 @@ if min_samples_best:
 # Load dataset
 x, y, _ = load_dset(args.file)
 data = np.array([x, y]).transpose()
+
+def remove_unassigned_points(data, labels):
+    rdata = []
+    rlabels = []
+    
+    for i in range(len(data)):
+        if labels[i] != 0:
+            rlabels.append(labels[i])
+            rdata.append(data[i])
+    
+    return rdata, rlabels
 
 if eps_best or min_samples_best:
     best_db_score= 1000
@@ -49,10 +62,11 @@ if eps_best or min_samples_best:
         
         dbs = DBSCAN(eps = eps, min_samples=min_samples)
         labels = dbs.fit_predict(data)
+        rdata, rlabels = remove_unassigned_points(data, labels)
         
         try:
-            db_score = metrics.davies_bouldin_score(data, labels)
-            sil_score = metrics.silhouette_score(data, labels, metric="euclidean", sample_size=None, random_state=None)
+            db_score = metrics.davies_bouldin_score(rdata, rlabels)
+            sil_score = metrics.silhouette_score(rdata, rlabels, metric="euclidean", sample_size=None, random_state=None)
         except:
             print("eps == %f: only 1 cluster" % eps)
             continue
@@ -71,8 +85,10 @@ if eps_best or min_samples_best:
             best_sil_score = sil_score
             best_sil = dbs
             
-    print("Best is eps == %f and min_samples == %f" % (best_db.eps, best_db.min_samples))
-    labels = best_db.fit_predict(data)
+    best = best_db if args.criteria == "db" else best_sil
+            
+    print("Best is eps == %f and min_samples == %f" % (best.eps, best.min_samples))
+    labels = best.fit_predict(data)
 else:
     args.eps = float(args.eps)
     args.min_samples = int(args.min_samples)
