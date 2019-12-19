@@ -12,6 +12,7 @@ parser = argparse.ArgumentParser(description="TP clustering")
 parser.add_argument("--eps", type=str, default="0.5", help="eps param for dbscan (default 0.5)")
 parser.add_argument("--min-samples", type=str, default="5", help="min_samples param for dbscan (default 5)")
 parser.add_argument("--criteria", type=str, default="db", help="Criteria for selecting best parameters: db = davies bouldin, sil = silhouette score")
+parser.add_argument("--remove", action="store_true", help="Remove unassigned points before evaluating the model")
 parser.add_argument("file", type=str, help="File to visualize")
 
 args = parser.parse_args()
@@ -62,7 +63,8 @@ if eps_best or min_samples_best:
         
         dbs = DBSCAN(eps = eps, min_samples=min_samples)
         labels = dbs.fit_predict(data)
-        rdata, rlabels = remove_unassigned_points(data, labels)
+        # TODO display unassigned labels so that we see which one they are.
+        rdata, rlabels = remove_unassigned_points(data, labels) if args.remove else (data, labels)
         
         try:
             db_score = metrics.davies_bouldin_score(rdata, rlabels)
