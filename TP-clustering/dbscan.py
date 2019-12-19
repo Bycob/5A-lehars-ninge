@@ -17,6 +17,8 @@ parser.add_argument("file", type=str, help="File to visualize")
 
 args = parser.parse_args()
 
+print("eps=%s, min-samples=%s" % (args.eps, args.min_samples))
+
 # Preprocess arguments
 eps_best = args.eps == "best"
 min_samples_best = args.min_samples == "best"
@@ -35,11 +37,14 @@ def remove_unassigned_points(data, labels):
     rlabels = []
     
     for i in range(len(data)):
-        if labels[i] != 0:
+        if labels[i] != -1:
             rlabels.append(labels[i])
             rdata.append(data[i])
     
     return rdata, rlabels
+
+def cluster_count(labels):
+    return max(labels) + 1
 
 if eps_best or min_samples_best:
     best_db_score= 1000
@@ -98,4 +103,5 @@ else:
     dbs = DBSCAN(eps = args.eps, min_samples=args.min_samples)
     labels = dbs.fit_predict(data)
 
+print("Cluster count = %d" % cluster_count(labels))
 visualize(x, y, labels, filename = "./dbscan.png")
