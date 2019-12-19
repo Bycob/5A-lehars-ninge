@@ -79,6 +79,4 @@ else:
         print("silhouette score : %f" % (
             metrics.silhouette_score(data, labels, metric="euclidean", sample_size=None, random_state=None)))
         print("calinski Harabasz score is %f" % (metrics.calinski_harabasz_score(data, labels)))
-        visualize(x, y, labels)
-
-
+        visualize(x, y, labels, filename="./agglo.png")

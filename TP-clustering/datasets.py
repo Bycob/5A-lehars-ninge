@@ -15,7 +15,7 @@ def load_dset(filename):
     
     return x, y, c
 
-def visualize(x, y, color):
+def visualize(x, y, color, filename=None, outliers=None):
     fig = plt.figure()
     ax = fig.add_subplot(111)
     
@@ -33,6 +33,9 @@ def visualize(x, y, color):
         ax.scatter(x, y, c = color, cmap= "tab20")
     else:
         ax.scatter(x, y)
+        
+    if filename != None:
+        plt.savefig(filename)
         
     plt.show()
 

@@ -98,4 +98,4 @@ else:
     dbs = DBSCAN(eps = args.eps, min_samples=args.min_samples)
     labels = dbs.fit_predict(data)
 
-visualize(x, y, labels)
+visualize(x, y, labels, filename = "./dbscan.png")
